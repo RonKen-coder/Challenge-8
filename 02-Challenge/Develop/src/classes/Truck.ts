@@ -17,36 +17,36 @@ class Truck extends Vehicle implements AbleToTow {
   wheels: Wheel[];
   towingCapacity: number;
 
-
   // TODO: Create a constructor that accepts the properties of the Truck class
-    constructor(
-      vin: string,
-      color: string,
-      make: string,
-      model: string,
-      year: number,
-      weight: number,
-      topSpeed: number,
-      wheels: Wheel[],
-      towingCapacity: number
-    ) {
-      super(vin, color, make, model, year, weight, topSpeed, wheels);
-      this.towingCapacity = towingCapacity;
-
-  // TODO: Implement the tow method from the AbleToTow interface
-  tow(vehicle: Truck | Motorbike | Car): void {
-  
-    // Check if the wheels array has 4 elements, if not, create 4 new default Wheel objects
-    if (wheels.length !== 4) {
-      this.wheels = [
-        new Wheel(20, 'Default'),
-        new Wheel(20, 'Default'),
-        new Wheel(20, 'Default'),
-        new Wheel(20, 'Default'),
-      ];
-    } else {
-      this.wheels = wheels;
-    }
+  constructor(
+    vin: string,
+    color: string,
+    make: string,
+    model: string,
+    year: number,
+    weight: number,
+    topSpeed: number,
+    wheels: Wheel[],
+    towingCapacity: number
+  ) {
+    super(); // Ensure to pass necessary parameters to the Vehicle constructor if needed
+    this.vin = vin;
+    this.color = color;
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.weight = weight;
+    this.topSpeed = topSpeed;
+    
+    // Initialize wheels array
+    this.wheels = wheels.length === 4 ? wheels : [
+      new Wheel(20, 'Default'),
+      new Wheel(20, 'Default'),
+      new Wheel(20, 'Default'),
+      new Wheel(20, 'Default'),
+    ];
+    
+    this.towingCapacity = towingCapacity;
   }
 
   // Implement the tow method from the AbleToTow interface
@@ -60,10 +60,10 @@ class Truck extends Vehicle implements AbleToTow {
   }
 
   // TODO: Override the printDetails method from the Vehicle class
-    printDetails(): void {
-    super.printDetails();
+  override printDetails(): void {
+    super.printDetails(); // Ensure this method exists in the Vehicle class
     console.log(`Towing Capacity: ${this.towingCapacity}`);
-    console.log(`Wheels: ${this.wheels.map(wheel => `${wheel.diameter} inch ${wheel.brand}`).join(', ')}`);
+    console.log(`Wheels: ${this.wheels.map(wheel => `${wheel.diameter} inch ${wheel.tireBrand}`).join(', ')}`);
   }
 }
 
